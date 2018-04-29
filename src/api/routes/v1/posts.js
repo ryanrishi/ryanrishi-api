@@ -4,9 +4,21 @@ var router = express.Router();
 const posts = [
   {
     id: 1,
-    title: 'first post',
+    title: 'DIY Snare Drum',
     publishedAt: new Date(),
-    content: 'first post content, isn\'t this interesting'
+    content: '<em> coming soon </em>'
+  },
+  {
+    id: 2,
+    title: 'Ember Component Lifecycle'
+  },
+  {
+    id: 3,
+    title: 'Gamelana-ding-dong'
+  },
+  {
+    id: 4,
+    title: 'The Seven'
   }
 ];
 
@@ -20,11 +32,11 @@ const serializePost = (post, single = true) => {
       title: post.title,
     }
   };
-  
+
   if (single) {
     return { data: serializedPost };
   }
-  
+
   return serializedPost;
 };
 
@@ -35,7 +47,7 @@ const serializePosts = (posts) => {
 /* GET posts listing. */
 router.get('/', function(req, res, next) {
   const serialized = serializePosts(posts);
-  
+
   res.json({ data: serialized });
 });
 
@@ -43,9 +55,9 @@ router
 .route('/:post')
 .get((req, res, next) => {
   const id = parseInt(req.params.post);
-  
+
   let post = posts.find(post => post.id === id);
-  
+
   if (post) {
     // const serialized = {
     //   data: {
@@ -66,4 +78,3 @@ router
 });
 
 module.exports = router;
-
