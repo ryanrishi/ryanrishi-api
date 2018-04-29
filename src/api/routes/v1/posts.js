@@ -46,7 +46,16 @@ const serializePosts = (posts) => {
 
 /* GET posts listing. */
 router.get('/', function(req, res, next) {
-  const serialized = serializePosts(posts);
+  let serialized;
+
+  if (req.query.limit) {
+    let { limit } = req.query;
+    limit = Math.min(limit, posts.length);
+    serialized = serializePosts(posts.slice(0, limit));
+  }
+  else {
+    serialized = serializePosts(posts);
+  }
 
   res.json({ data: serialized });
 });

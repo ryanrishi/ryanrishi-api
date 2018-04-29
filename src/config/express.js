@@ -8,7 +8,7 @@ const routes = require('../api/routes/v1');
 var app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(morgan('dev'));
