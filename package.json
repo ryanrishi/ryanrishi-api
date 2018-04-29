@@ -11,6 +11,7 @@
     "express": "~4.13.1"
   },
   "devDependencies": {
+    "dotenv-safe": "~5.0.1",
     "knex": "~0.14.6",
     "mysql": "~2.15.0",
     "nodemon": "~1.17.3"
