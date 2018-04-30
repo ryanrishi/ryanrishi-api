@@ -1,28 +1,31 @@
 
-exports.up = function(knex, Promise) {
+exports.up = (knex, Promise) => {
   return Promise.all([
+    knex.schema.createTable('users', (t) => {
+      t.increments('id').primary();
+      t.string('name');
+    }),
 
-        knex.schema.createTable('users', function(table) {
-            table.increments('id').primary();
-            table.string('name');
-            table.timestamps();
-        }),
+    knex.schema.createTable('posts', (t) => {
+      t.increments('id').primary();
+      t.string('title');
+      t.string('body');
+      t.integer('author_id')
+        .references('id')
+        .inTable('users');
+      t.timestamp('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+      // TODO `CURRENT_TIMESTAMP ON UPDATE` doesn't work in SQLite3, seems unique to MySql
+      // https://stackoverflow.com/questions/6578439/on-update-current-timestamp-with-sqlite
+      // t.timestamp('updated_at').defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
-        knex.schema.createTable('posts', function(table){
-            table.increments('id').primary();
-            table.string('title');
-            table.string('body');
-            table.integer('author_id')
-                 .references('id')
-                 .inTable('users');
-            table.dateTime('postDate');
-        })
-    ]);
+      t.timestamp('updated_at').defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+    })
+  ]);
 };
 
-exports.down = function(knex, Promise) {
+exports.down = (knex, Promise) => {
   return Promise.all([
-        knex.schema.dropTable('users'),
-        knex.schema.dropTable('posts')
-    ]);
+    knex.schema.dropTable('users'),
+    knex.schema.dropTable('posts')
+  ]);
 };
