@@ -1,26 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
-const posts = [
-  {
-    id: 1,
-    title: 'DIY Snare Drum',
-    publishedAt: new Date(),
-    content: '<em> coming soon </em>'
-  },
-  {
-    id: 2,
-    title: 'Ember Component Lifecycle'
-  },
-  {
-    id: 3,
-    title: 'Gamelana-ding-dong'
-  },
-  {
-    id: 4,
-    title: 'The Seven'
-  }
-];
+const postsController = require('../../controllers/posts.controller');
 
 const serializePost = (post, single = true) => {
   let serializedPost = {
@@ -45,24 +25,15 @@ const serializePosts = (posts) => {
 };
 
 /* GET posts listing. */
-router.get('/', function(req, res, next) {
-  let serialized;
-
-  if (req.query.limit) {
-    let { limit } = req.query;
-    limit = Math.min(limit, posts.length);
-    serialized = serializePosts(posts.slice(0, limit));
-  }
-  else {
-    serialized = serializePosts(posts);
-  }
-
-  res.json({ data: serialized });
+router.get('/', (req, res) => {
+  // TODO GET /posts?limit=5
+  return postsController.listPosts(req, res);
 });
 
 router
-.route('/:post')
-.get((req, res, next) => {
+.route('/:id')
+.get((req, res) => {
+  return postsController.getPost(req, res);
   const id = parseInt(req.params.post);
 
   let post = posts.find(post => post.id === id);
