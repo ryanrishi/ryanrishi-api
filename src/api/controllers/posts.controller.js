@@ -1,32 +1,37 @@
 const knex = require('../../config/db');
 const PostsSerializer = require('../serializers/posts.serializer');
+const { notFound, handler: errorHandler } = require('../middlewares/error');
 
 /**
  * @todo support limit query param
- * @todo (req, res) => (req, res, next) for error handling, serialization?
  */
 const listPosts = (req, res) => {
-  knex.table('posts').select().then((collection) => {
+  let { limit } = req.query;
+
+  let query = knex.table('posts');
+  let parsedLimit = parseInt(limit);
+  if (Number.isInteger(parsedLimit)) {
+    query.limit(parsedLimit);
+  }
+
+  query.select().then((collection) => {
     let serializedPosts = PostsSerializer.serialize(collection);
     res.json(serializedPosts);
   }).catch((error) => {
-    res.status(500).json({
-      error
-    });
+    errorHandler(error, req, res);
   });
 };
 
-/**
- * @todo 404
- */
 const getPost = (req, res) => {
   let { id } = req.params;
 
   knex.table('posts').select().where({ id }).then((collection) => {
+    if (collection.length === 0) {
+      return notFound(req, res);
+    }
+
     let serializedPost = PostsSerializer.serialize(collection);
     res.json(serializedPost);
-  }).catch((error) => {
-    res.status(500).json({ error });
   });
 };
 

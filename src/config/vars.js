@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-export default {
+module.exports = {
   databasePort: process.env.DATABASE_PORT,
   databaseHost: process.env.DATABASE_HOST,
   databaseName: process.env.DATABASE_NAME,
@@ -8,4 +8,5 @@ export default {
   databaseAccessKey: process.env.DATABASE_ACCESS_KEY,
   databasePoolMin: process.env.DATABASE_POOL_MIN,
   databasePoolMax: process.env.DATABASE_POOL_MAX,
+  env: process.env.NODE_ENV
 };
