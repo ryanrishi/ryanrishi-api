@@ -22,12 +22,11 @@ exports.seed = function(knex, Promise) {
       let postBody = () => faker.lorem.paragraphs(5).split('\n \r').map(p => `<p> ${p} </p>`).join('');
 
       for (let i = 0; i < 10; i++) {
-        console.log('postBody => ', postBody());
-
         let post = {
           title: faker.lorem.sentence(),
           slug: faker.lorem.slug(),
           body: postBody(),
+          published_at: knex.fn.now(),
           author_id: 1
         };
 

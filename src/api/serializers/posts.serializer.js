@@ -5,7 +5,13 @@ const JSONAPISerializer = require('jsonapi-serializer').Serializer;
  * @type {JSONAPISerializer}
  */
 const PostsSerializer = new JSONAPISerializer('posts', {
-  attributes: ['title', 'body', 'created_at', 'slug']
+  attributes: [
+    'title',
+    'body',
+    'slug',
+    'created_at',
+    'published_at'
+  ]
 });
 
 module.exports = PostsSerializer;
