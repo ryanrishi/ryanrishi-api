@@ -25,6 +25,7 @@ exports.seed = function(knex, Promise) {
         let post = {
           title: faker.lorem.sentence(),
           slug: faker.lorem.slug(),
+          blurb: faker.lorem.paragraph(),
           body: postBody(),
           published_at: knex.fn.now(),
           author_id: 1

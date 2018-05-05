@@ -8,6 +8,7 @@ const PostsSerializer = new JSONAPISerializer('posts', {
   attributes: [
     'title',
     'body',
+    'blurb',
     'slug',
     'created_at',
     'published_at'
