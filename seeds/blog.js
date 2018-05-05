@@ -1,3 +1,4 @@
+const faker = require('faker');
 
 exports.seed = function(knex, Promise) {
   return Promise.all([
@@ -17,20 +18,18 @@ exports.seed = function(knex, Promise) {
       console.log('Deleted posts');
       console.log('Seeding posts');
 
-      return knex('posts').insert([
-        {
-          id: 1,
-          title: 'First Post Title',
-          body: 'first post body',
-          author_id: 1,
-        },
-        {
-          id: 2,
-          title: 'Second post title',
-          body: 'body post second',
-          author_id: 1,
-        }
-      ]);
+      let posts = [];
+      for (let i = 0; i < 10; i++) {
+        let post = {
+          title: faker.lorem.sentence(),
+          body: faker.lorem.paragraphs(5),
+          author_id: 1
+        };
+
+        posts.push(post);
+      }
+
+      return knex('posts').insert(posts);
     })
   ]);
 };
