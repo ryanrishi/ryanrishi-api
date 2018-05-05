@@ -23,14 +23,16 @@ const listPosts = (req, res) => {
 };
 
 const getPost = (req, res) => {
-  let { id } = req.params;
+  let { slug } = req.params;
 
-  knex.table('posts').select().where({ id }).then((collection) => {
+  knex.table('posts').select().where({ slug }).then((collection) => {
     if (collection.length === 0) {
       return notFound(req, res);
     }
 
-    let serializedPost = PostsSerializer.serialize(collection);
+    let post = collection[0];
+
+    let serializedPost = PostsSerializer.serialize(post);
     res.json(serializedPost);
   });
 };

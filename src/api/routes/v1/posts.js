@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
   return postsController.listPosts(req, res);
 });
 
-router.route('/:id')
+router.route('/:slug')
   .get((req, res) => {
     return postsController.getPost(req, res);
   });

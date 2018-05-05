@@ -19,10 +19,15 @@ exports.seed = function(knex, Promise) {
       console.log('Seeding posts');
 
       let posts = [];
+      let postBody = () => faker.lorem.paragraphs(5).split('\n \r').map(p => `<p> ${p} </p>`).join('');
+
       for (let i = 0; i < 10; i++) {
+        console.log('postBody => ', postBody());
+
         let post = {
           title: faker.lorem.sentence(),
-          body: faker.lorem.paragraphs(5),
+          slug: faker.lorem.slug(),
+          body: postBody(),
           author_id: 1
         };
 
