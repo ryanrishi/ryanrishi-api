@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon node ./bin/www",
-    "start": "node ./bin/www"
+    "start": "pm2 start bin/www -i max --name ryanrishi-api",
+    "test": "echo \"tests not set up yet\""
   },
   "dependencies": {
     "body-parser": "~1.13.2",

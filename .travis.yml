@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "lts/*"
+
+addons:
+  apt:
+    update: true
+
+
+# https://gist.github.com/qoomon/c57b0dc866221d91704ffef25d41adcf
+before_install:
+  - >-
+    openssl aes-256-cbc
+    -K $encrypted_8a2ef5ce518b_key
+    -iv $encrypted_8a2ef5ce518b_iv
+    -in github_deploy_key.enc
+    -out github_deploy_key
+    -d
+  - chmod 600 github_deploy_key
+  - eval $(ssh-agent -s)
+  - ssh-add github_deploy_key
