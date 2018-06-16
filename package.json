@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon node ./bin/www",
-    "start": "pm2 start bin/www -i max --name ryanrishi-api",
+    "start": "nodemon node ./bin/www",
+    "prod": "pm2 start bin/www -i max --name ryanrishi-api",
     "test": "echo \"tests not set up yet\""
   },
   "dependencies": {
