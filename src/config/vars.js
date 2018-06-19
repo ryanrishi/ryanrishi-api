@@ -8,5 +8,6 @@ module.exports = {
   databaseAccessKey: process.env.DATABASE_ACCESS_KEY,
   databasePoolMin: process.env.DATABASE_POOL_MIN,
   databasePoolMax: process.env.DATABASE_POOL_MAX,
-  env: process.env.NODE_ENV
+  env: process.env.NODE_ENV,
+  newrelicLicenseKey: process.env.NEWRELIC_LICENSE_KEY
 };
