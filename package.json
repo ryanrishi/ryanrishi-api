@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon node ./bin/www",
-    "prod": "pm2 start bin/www -i max --name ryanrishi-api",
+    "prod": "node_modules/.bin/pm2 start bin/www -i max --name ryanrishi-api",
     "test": "echo \"tests not set up yet\""
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "knex": "~0.14.6",
     "morgan": "~1.9.0",
     "mysql": "~2.15.0",
-    "nodemon": "~1.17.3"
+    "nodemon": "~1.17.3",
+    "pm2": "~2.10.4"
   }
 }
